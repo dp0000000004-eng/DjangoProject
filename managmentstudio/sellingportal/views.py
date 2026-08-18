@@ -1,9 +1,9 @@
 from django.shortcuts import render
-#from django.http import HttpResponse
 from sellingportal import models
 from sellingportal import  forms
-def Index(request):
 
+
+def Index(request):
 
     context={'name':'hussein',
              'age':26,
@@ -11,8 +11,6 @@ def Index(request):
 
              }
     return render(request,'index.html',context)
-
-  #return HttpResponse('welcome to index page')
 
 
 def Student(request):
@@ -28,7 +26,7 @@ def StudentDegree(request,student_id):
     degrees=models.Degree.objects.filter(student_id=student_id )
     stuents=models.Student.objects.get(id=student_id)
     form_data=forms.DegreeRegistrar(request.POST or None)
-    msg=''
+    msg = None
     if form_data.is_valid():
        degree=models.Degree()
        degree.student_drgee=form_data.cleaned_data['student_drgee']
@@ -49,7 +47,7 @@ def StudentDegree(request,student_id):
 def Register(request):
 
   form_data=forms.UserRegistrar(request.POST or None)
-  msg=''
+  msg = None
   if form_data.is_valid():
        student=models.Student()
        student.first_name=form_data.cleaned_data['first_name']
@@ -66,41 +64,3 @@ def Register(request):
   return render(request,'regiester.html',context)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Create your views here.
-#from django.http import HttpResponse
-
-#def Details(request,student_id):
-    # return HttpResponse('hellow student id:' + student_id)
